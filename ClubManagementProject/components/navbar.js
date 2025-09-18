@@ -10,8 +10,8 @@ export default function Navbar() {
                 <li><Link href="/clubs">Clubs</Link></li>
             </ul>
             <div className="auth">
-                <button>Login</button>
-                <button>Sign Up</button>
+                <button><Link href="/auth?type=login">Login</Link></button>
+                <button><Link href="/auth?type=sign-up">Sign Up</Link></button>
             </div>
         </nav>
     );
