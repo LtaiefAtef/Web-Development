@@ -2,8 +2,9 @@
 import logo from "@/assets/logo.png"
 import view from "@/assets/view.png"
 import hide from "@/assets/eye.png"
-import { useState } from "react"
+import { useActionState, useState } from "react"
 import { useSearchParams } from "next/navigation"
+import { auth } from "@/actions/auth-actions"
 export default function AuthenticationPage(){
     const [show,setShow] = useState(false)
     const params = useSearchParams().get("type")
@@ -17,11 +18,13 @@ export default function AuthenticationPage(){
             document.querySelector("."+e.target.name).classList.remove("stay-top")
         }
     }
+    const [formState,formAction,isPending] = useActionState(auth.bind(null,params),null)
     return(
         <div className="auth-page">
-            <form>
+            <form action={formAction}>
                 <header><img src={logo.src} alt="logo"/><h1>BI Crew</h1><img src={logo.src} alt="logo"/></header>
-                <div className="container" style={{marginTop:params=="login" && "40px"}}>
+                {formState && <div className="auth-error">{formState}</div>}
+                <div className="container" style={{marginTop:params=="login" && "25px"}}>
                 {params==="sign-up" && <div className="content">
                         <div className="field"><input type="text" name="name" onChange={focused}/><small className="name">Name</small></div>
                         <div className="field"><input type="text" name="prename" onChange={focused}/><small className="prename">Prename</small></div>
@@ -37,7 +40,7 @@ export default function AuthenticationPage(){
                     alt="toggle-password"
                     onClick={()=>setShow(!show)}
                     /></div>
-                    <button type="submit">Login</button>
+                    {isPending ?<button disabled>Loading</button>:<button type="submit">{params ==="login" ? "Login":"Sign Up"}</button>}
                 </div>
             </form>
         </div>
