@@ -17,3 +17,30 @@ export async function createUser(full_name,phone,email,password){
         }
     }
 }
+
+export async function findUser(email){
+    const stmt = db.prepare("SELECT * FROM users WHERE email = ?").get(email)
+    if(stmt){
+        return{
+            success:true,
+            userInfo:stmt
+        }
+    }
+    return{
+            success:false,
+            error:"User Not found"
+    }
+}
+export async function findUserWithId(userId){
+    const stmt = db.prepare("SELECT * FROM users where id = ?").get(userId)
+    if(stmt){
+        return {
+            success:true,
+            userInfo:stmt
+        }
+    }
+    return{
+        success:false,
+        error:"User Not Found"
+    }
+}

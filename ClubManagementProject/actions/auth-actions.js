@@ -1,8 +1,9 @@
 "use server"
 
 import { createAuthSession } from "@/lib/auth";
-import { createUser } from "@/lib/DATA_OPS";
-import { hashUserPassword } from "@/lib/hash";
+import { createUser, findUser } from "@/lib/DATA_OPS";
+import { hashUserPassword, verifyPassword } from "@/lib/hash";
+import { ReactServerDOMTurbopackClient } from "next/dist/server/route-modules/app-page/vendored/ssr/entrypoints";
 import { redirect } from "next/navigation";
 
 export async function signup(prevState,formData){
@@ -18,17 +19,29 @@ export async function signup(prevState,formData){
     if(!email_regex.test(email)) return "Please enter a valid email.";
     if(password.trim().length < 8) return "Password must be at least 8 characters long.";
     const hashedPassword = hashUserPassword(password)
-    const result = await createUser(full_name,phone,email,password)
+    const result = await createUser(full_name,phone,email,hashedPassword)
     if(result.success){
         await createAuthSession(result.userId)
         redirect("/")
     }else{
-        // return "User Already Exists"
-        console.log(result)
+        return "User Already Exists"
     }
 }
-export async function login(prevState,formData){
-    return null;
+export async function login(prevState,formData) {
+    const email = formData.get("email")
+    const password = formData.get("password")
+    const result = await findUser(email)
+    if(result.success){
+        const verif = verifyPassword(result.userInfo.password,password)
+        if(verif){
+            await createAuthSession(result.userInfo.id)
+            redirect("/")
+        }
+        return "User Not Found"
+    }else{
+        console.log("error")
+        return result.error
+    }
 }
 export async function auth(mode,prevState,formData){
     if(mode==="login"){

@@ -37,6 +37,16 @@
       }
     }
   }
+  .user{
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      justify-content: center;
+      width: 200px;
+      cursor: pointer;
+      text-decoration: none;
+      color: black;
+    }
   .auth{
     display: flex;
     align-items: center;

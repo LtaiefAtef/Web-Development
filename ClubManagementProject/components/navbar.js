@@ -1,6 +1,14 @@
 import logo from "@/assets/logo.png"
+import user from "@/assets/user.png"
+import { verifyAuth } from "@/lib/auth";
+import { findUser, findUserWithId } from "@/lib/DATA_OPS";
 import Link from "next/link";
-export default function Navbar() {
+export default async function Navbar() {
+    const verifyUser = await verifyAuth()
+    let data=null;
+    if(verifyUser.user){
+        data = await findUserWithId(verifyUser.user.id)
+    }
     return(
         <nav className="navbar">
             <img className="logo" src={logo.src} alt="Website logo"/>
@@ -9,10 +17,13 @@ export default function Navbar() {
                 <li><Link href="/contact">Contact</Link></li>
                 <li><Link href="/clubs">Clubs</Link></li>
             </ul>
-            <div className="auth">
-                <button><Link href="/auth?type=login">Login</Link></button>
-                <button><Link href="/auth?type=sign-up">Sign Up</Link></button>
-            </div>
+            {verifyUser.user ? <Link className="user" href="/profile">
+                    <img src={user.src} width={25} height={25} alt="User profile picture"/>
+                    <span>{data.userInfo.full_name}</span>
+                </Link>:<div className="auth">
+                <Link href="/auth?type=login"><button>Login</button></Link>
+                <Link href="/auth?type=sign-up"><button>Sign Up</button></Link>
+            </div>}
         </nav>
     );
 }
