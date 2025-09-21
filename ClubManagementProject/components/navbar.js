@@ -1,7 +1,7 @@
 import logo from "@/assets/logo.png"
 import user from "@/assets/user.png"
 import { verifyAuth } from "@/lib/auth";
-import { findUser, findUserWithId } from "@/lib/DATA_OPS";
+import {findUserWithId } from "@/lib/DATA_OPS";
 import Link from "next/link";
 export default async function Navbar() {
     const verifyUser = await verifyAuth()
@@ -17,7 +17,7 @@ export default async function Navbar() {
                 <li><Link href="/contact">Contact</Link></li>
                 <li><Link href="/clubs">Clubs</Link></li>
             </ul>
-            {verifyUser.user ? <Link className="user" href="/profile">
+            {verifyUser.user ? <Link className="user" href={`/profile?userId=${verifyUser.user.id}`}>
                     <img src={user.src} width={25} height={25} alt="User profile picture"/>
                     <span>{data.userInfo.full_name}</span>
                 </Link>:<div className="auth">

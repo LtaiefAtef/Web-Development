@@ -1,9 +1,8 @@
 "use server"
 
 import { createAuthSession } from "@/lib/auth";
-import { createUser, findUser } from "@/lib/DATA_OPS";
+import { createUser, findUser, findUserWithId, updateUserPassword, verifyOldPassword } from "@/lib/DATA_OPS";
 import { hashUserPassword, verifyPassword } from "@/lib/hash";
-import { ReactServerDOMTurbopackClient } from "next/dist/server/route-modules/app-page/vendored/ssr/entrypoints";
 import { redirect } from "next/navigation";
 
 export async function signup(prevState,formData){
@@ -48,4 +47,39 @@ export async function auth(mode,prevState,formData){
         return login(prevState,formData);
     }
     return signup(prevState,formData);
+}
+export async function changePassword(userId,prevState,formData){
+    if(!formData){
+        return;
+    }
+    const oldPassword = formData.get("old-password")
+    const newPassword = formData.get("new-password")
+    const confirmNewPassword = formData.get("confirm-new-password")
+    if(oldPassword===""||newPassword===""||confirmNewPassword===""){
+        return{
+            success:false,
+            error:"All the fields must be filled."
+        }
+    }
+    const result  =await findUserWithId(userId)
+    const verif =  verifyPassword(result.userInfo.password,oldPassword)
+    if(!verif){
+        return{
+            success:false,
+            error:"Incorrect Old Password."
+        }
+    }
+    if(newPassword!=confirmNewPassword){
+        return {
+            success:false,
+            error:"New password and confirmation do not match."
+        }
+    }
+    const passwordChanged = await updateUserPassword(userId,hashUserPassword(newPassword))
+    if(passwordChanged.changes > 0){
+        return{
+            success:true,
+            message:"Password Changed Sucessfully"
+        }
+    }
 }

@@ -44,3 +44,20 @@ export async function findUserWithId(userId){
         error:"User Not Found"
     }
 }
+export async function requestUserData(userId){
+    const stmt = db.prepare("SELECT * FROM users where id = ?").get(userId)
+    if(stmt){
+        return{
+            success:true,
+            userInfo:stmt
+        }
+    }
+    return {
+        success:false,
+        error:"User Not Found"
+    }
+}
+export async function updateUserPassword(userId,password){
+    const stmt = db.prepare("UPDATE users set password = ? where id=?").run(password,userId)
+    return stmt
+}
