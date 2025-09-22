@@ -29,7 +29,6 @@ export default function ProfilePage() {
             alert("Password Changed Sucessfully")
         }
     },[formState])
-
     return(
         <main className="profile-page">
             {modifyPassword && <form className="modify-password" action={formAction}>

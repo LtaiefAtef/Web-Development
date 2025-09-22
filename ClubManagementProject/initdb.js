@@ -4,7 +4,7 @@ db.exec(`
     CREATE TABLE IF NOT EXISTS users(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         full_name text,
-        phone INT,
+        phone INTEGER,
         email TEXT UNIQUE,
         password TEXT
     );`)
@@ -14,4 +14,14 @@ db.exec(`CREATE TABLE IF NOT EXISTS sessions(
     user_id TEXT NOT NULL,
     FOREIGN KEY(user_id) REFERENCES users(id)
     );`);
+db.exec(`CREATE TABLE IF NOT EXISTS requests(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        userId INTEGER,
+        username text,
+        email text,
+        category text,
+        request text,
+        status text,
+        request_date date
+    );`)
 export default db;

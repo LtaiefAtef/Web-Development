@@ -7,7 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { auth } from "@/actions/auth-actions"
 export default function Authentication({verified}){
     const router = useRouter()
-    if(verified.session){
+    if(verified?.session){
         router.back()
     }
     const [show,setShow] = useState(false)
