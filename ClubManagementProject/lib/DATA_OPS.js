@@ -1,11 +1,12 @@
 "use server"
 import sql from "better-sqlite3"
+import { Ruthie } from "next/font/google"
 const db = sql("biCrew.db")
 
 // CREATE USER ACCOUNT
 export async function createUser(full_name,phone,email,password){
     try{
-        const stmt = db.prepare(`INSERT INTO users (full_name, phone, email, password) VALUES (?, ?, ?, ?)`).run(full_name, phone, email, password)
+        const stmt = db.prepare(`INSERT INTO users (rank,full_name, phone, email, password) VALUES ('Student',?, ?, ?, ?)`).run(full_name, phone, email, password)
         return{
             success:true,
             userId:stmt.lastInsertRowid
@@ -60,4 +61,31 @@ export async function requestUserData(userId){
 export async function updateUserPassword(userId,password){
     const stmt = db.prepare("UPDATE users set password = ? where id=?").run(password,userId)
     return stmt
+}
+export async function addClub(clubName,clubDescription,userId,author_name) {
+    try{
+        const stmt = db.prepare(`INSERT INTO clubs VALUES (NULL,?,?,datetime('now'),?,?,NULL,NULL)`).run(clubName,clubDescription,userId,author_name)
+        return{
+            success:true,
+            stmt
+        }
+    }catch(error){
+        return {
+            success:false,
+            error
+        }
+    }
+}
+export async function getClubs() {
+    const stmt = db.prepare(`SELECT * FROM clubs`).all()
+    if(stmt){
+        return{
+            success:true,
+            stmt
+        }
+    }
+    return{
+        success:false,
+        error:"No Clubs Found"
+    }
 }

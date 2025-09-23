@@ -3,6 +3,7 @@ const db = sql("biCrew.db")
 db.exec(`
     CREATE TABLE IF NOT EXISTS users(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        rank text,
         full_name text,
         phone INTEGER,
         email TEXT UNIQUE,
@@ -14,6 +15,21 @@ db.exec(`CREATE TABLE IF NOT EXISTS sessions(
     user_id TEXT NOT NULL,
     FOREIGN KEY(user_id) REFERENCES users(id)
     );`);
+db.exec(`CREATE TABLE IF NOT EXISTS clubs(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    club_name text,
+    description text,
+    creation_date date,
+    author_id INTEGER,
+    author_name text,
+    member_list INTEGER,
+    event_list INTEGER
+    );`)
+db.exec(`CREATE TABLE IF NOT EXISTS member_list(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    full_name text
+    );`)
 db.exec(`CREATE TABLE IF NOT EXISTS requests(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         userId INTEGER,

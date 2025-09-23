@@ -1,7 +1,7 @@
 "use server"
 
 import { createAuthSession } from "@/lib/auth";
-import { createUser, findUser, findUserWithId, updateUserPassword, verifyOldPassword } from "@/lib/DATA_OPS";
+import { addClub, createUser, findUser, findUserWithId, updateUserPassword, verifyOldPassword } from "@/lib/DATA_OPS";
 import { hashUserPassword, verifyPassword } from "@/lib/hash";
 import { redirect } from "next/navigation";
 
@@ -23,6 +23,7 @@ export async function signup(prevState,formData){
         await createAuthSession(result.userId)
         redirect("/")
     }else{
+        console.log(result.error)
         return "User Already Exists"
     }
 }
@@ -80,6 +81,27 @@ export async function changePassword(userId,prevState,formData){
         return{
             success:true,
             message:"Password Changed Sucessfully"
+        }
+    }
+}
+export async function createClub(userId,prevState,formData){
+    if(!formData){
+        return;
+    }
+    const clubName = formData.get("club-name")
+    const clubDescription = formData.get("club-description")
+    if(clubName.length < 6 && clubDescription.length < 6){
+        return {
+            success:false,
+            error:"Both fields must be at least 6 characters length"
+        }
+    }
+    const userInfo = await findUserWithId(userId)
+    const result = await addClub(clubName,clubDescription,userId,userInfo.userInfo.full_name)
+    if(result.success){
+        return{
+            success:true,
+            message:"Club Create Sucessfully"
         }
     }
 }

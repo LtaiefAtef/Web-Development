@@ -7,9 +7,6 @@
   margin: 0;
   padding: 0;
 }
-/* .navbar > *{
-  border: 1px solid black;
-} */
 .navbar{
   padding: 10px;
   display: flex;
@@ -445,6 +442,171 @@
         }
         &:active{
           background-color: #1d37ce;
+        }
+      }
+    }
+  }
+}
+.clubs-page{
+  background-color: #f3f6ff;
+  min-height: calc(100vh - 120px);
+  padding: 20px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  .search-box{
+    margin: 0 auto;
+    width:800px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    .search{
+      position:relative;
+      padding: 20px;
+      width: 68%;
+      img{
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translate(calc(50% + 15px),-50%);
+      }
+      input{
+        padding: 10px;
+        border-radius: 5px;
+        border: transparent;
+        outline: none;
+        width: 100%;
+        text-indent: 20px;
+      }
+    }
+    button{
+      background-color: #4661f7;
+      color: white;
+      padding: 10px;
+      border: transparent;
+      border-radius: 10px;
+      font-family: monospace;
+      cursor: pointer;
+      &:hover{
+          background-color: #2140f0;
+        }
+      &:active{
+          background-color: #1d37ce;
+      }
+    }
+  }
+  .club-form{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin: 0 auto;
+    gap: 5px;
+    .error{
+      color: red;
+      background-color: rgb(255, 211, 211);
+      padding: 10px;
+      margin-block: 10px;
+      font-size: 14px;
+      font-weight: lighter;
+      border-radius: 2px;
+    }
+    h4{
+      font-weight: 600;
+      font-size: 14px;
+    }
+    input{
+      border:transparent;
+      padding: 10px;
+      width:410px;
+      border-radius: 5px;
+      outline: none;
+    }
+    textarea{
+      width:400px;
+      height: 180px;
+      border: transparent;
+      border-radius: 5px;
+      outline: none;
+      padding: 10px;
+      font-size: 14px;
+      resize: none;
+    }
+      button{
+      background-color: #4661f7;
+      color: white;
+      padding: 10px;
+      width: fit-content;
+      align-self: flex-end;
+      border: transparent;
+      border-radius: 10px;
+      font-family: monospace;
+      margin: 10px;
+      cursor: pointer;
+      &:hover{
+          background-color: #2140f0;
+        }
+      &:active{
+          background-color: #1d37ce;
+      }
+    }
+  }
+  h1{
+    color: #4661f7;
+    width: fit-content;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
+  .line{
+    padding: 4px;
+    background-color: #4661f7;
+    border-radius: 20px;
+    width:60px;
+    margin: 0 auto;
+  }
+  .club-list{
+    display: flex;
+    justify-content: space-evenly;
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 50px;
+    .club{
+      display: flex;
+      flex-direction: column;
+      background-color: white;
+      height: 275px;
+      width:375px;
+      padding: 10px;
+      overflow: hidden;
+      border-radius: 5px;
+      a{
+        font-size: 24px;
+        font-weight: bold;
+        color: #4661f7;
+        text-decoration: none;
+        &:hover{
+          text-decoration:underline;
+        }
+      }
+      img{
+        overflow: hidden;
+        object-fit:cover;
+        height: 65%;
+      }
+      .club_info{
+        display: flex;
+        margin: 15px;
+        margin-bottom: 0;
+        flex-direction: column;
+        justify-content: center;
+        height: 30%;
+        h4{
+          font-size: 14px;
+          font-weight: 600;
+        }
+        small{
+          display: flex;
+          align-items: center;
+          gap:5px;
+          margin-top: 7px;
         }
       }
     }

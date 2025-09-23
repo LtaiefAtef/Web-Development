@@ -15,7 +15,7 @@ export default async function Navbar() {
             <ul className="nav-links">
                 <li><Link href="/">Home</Link></li>
                 <li><Link href="/contact">Contact</Link></li>
-                <li><Link href="/clubs">Clubs</Link></li>
+                <li><Link href={data ? `/clubs?userId=${data.userInfo.id}`:`/clubs`}>Clubs</Link></li>
             </ul>
             {verifyUser.user ? <Link className="user" href={`/profile?userId=${verifyUser.user.id}`}>
                     <img src={user.src} width={25} height={25} alt="User profile picture"/>
