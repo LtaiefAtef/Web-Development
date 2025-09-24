@@ -600,7 +600,13 @@
         height: 30%;
         h4{
           font-size: 14px;
-          font-weight: 600;
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          span{
+            margin-left: 5px;
+            font-weight:700;
+          }
         }
         small{
           display: flex;
@@ -610,5 +616,178 @@
         }
       }
     }
+  }
+}
+.club-details-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+
+  .club-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+
+    .club-title {
+      font-size: 3rem;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .club-meta {
+      color: #7f8c8d;
+      font-size: 1.1rem;
+    }
+  }
+
+  .club-content {
+    display: grid;
+    gap: 2rem;
+
+    .description-section,
+    .author-section,
+    .members-section,
+    .events-section {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+
+      h2 {
+        color: #2c3e50;
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 0.5rem;
+      }
+    }
+  }
+
+  .author-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border-left: 4px solid #3498db;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .author-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #3498db;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    .author-info {
+      h3 {
+        margin: 0 0 0.5rem 0;
+        color: #2c3e50;
+        font-size: 1.3rem;
+      }
+
+      .author-rank {
+        color: #e74c3c;
+        font-weight: 600;
+        margin: 0.25rem 0;
+      }
+
+      .author-contact {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+
+        span {
+          color: #7f8c8d;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+
+  .no-members,
+  .no-events {
+    text-align: center;
+    color: #7f8c8d;
+    font-style: italic;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+  }
+
+  .members-grid,
+  .events-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .description-section:hover,
+  .members-section:hover,
+  .events-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    transition: all 0.3s ease;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+
+    .club-header {
+      .club-title {
+        font-size: 2rem;
+      }
+    }
+
+    .author-card {
+      flex-direction: column;
+      text-align: center;
+
+      .author-contact {
+        align-items: center;
+      }
+    }
+  }
+  .join-button {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin-top: 1.5rem;
+    padding: 0.8rem 2rem;
+    background-color: #4661f7;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+}
+  .join-button:hover {
+      background-color: #1d37ce;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  }
+  .join-button:active{
+      background-color: #031269;
   }
 }

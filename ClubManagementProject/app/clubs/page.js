@@ -51,8 +51,8 @@ export default function ClubsPage() {
                     return <div className="club" key={index}>
                     <img src={close.src} width={350} height={180} alt="Club banner"/>
                     <div className="club_info">
-                        <Link href={`/clubs/club-detail?club_id=${club.id}&author_id=${club.author_id}`} className="club_name">{club.club_name}</Link>
-                        <h4>Founded on {club.creation_date} by</h4>
+                        <Link href={`/club-detail?club_id=${club.id}&author_id=${club.author_id}`} className="club_name">{club.club_name}</Link>
+                        <h4>Founded on {club.creation_date.slice(0,10)} by<span>{club.author_name}</span></h4>
                         <small><img width={20} height={20} src={group.src} className="members" alt="members"/><label>{club.member_list ? "":"0"} Members</label></small>
                     </div>
                 </div>})}

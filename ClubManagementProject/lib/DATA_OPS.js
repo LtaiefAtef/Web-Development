@@ -89,3 +89,16 @@ export async function getClubs() {
         error:"No Clubs Found"
     }
 }
+export async function findClubWithId(club_id) {
+    const stmt = db.prepare(`SELECT * FROM clubs where id=?`).get(club_id)
+    if(stmt){
+        return{
+            success:true,
+            stmt
+        }
+    }
+    return{
+        success:false,
+        error:"No Clubs Found"
+    }
+}
