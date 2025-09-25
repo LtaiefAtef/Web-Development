@@ -102,3 +102,49 @@ export async function findClubWithId(club_id) {
         error:"No Clubs Found"
     }
 }
+export async function addRequest(userId,request){
+    try{
+        const userInfo = db.prepare("SELECT * FROM users where id = ?").get(userId)
+        const stmt = db.prepare("INSERT INTO requests VALUES(NULL,?,?,?,'Club Creation',?,'Pending',datetime('now'))")
+        .run(userId,userInfo.full_name,userInfo.email,request)
+        console.log(stmt)
+        return{
+            success:stmt.changes > 0,
+            message:"Your request has been sent to the authors."
+        }
+    }catch(error){
+        console.log("ERROR ADDING REQUEST..." ,error)
+        return{
+            success:false,
+            error
+        }
+    }
+}
+export async function getRequests(){
+    const stmt = db.prepare("SELECT * FROM REQUESTS").all()
+    if(stmt.length > 0){
+        return {
+            success:true,
+            stmt
+        }
+    }
+    console.log("sth went wrong")
+    return {
+        success:false,
+        error:"No Requests in mean time..."
+    }
+}
+export async function modifyRequest(id,value){
+    try{
+        const stmt = db.prepare("UPDATE requests set status = ? where id = ?").run(value,id)
+        return {
+            success:stmt.changes > 0,
+            message:"Request has been modified"
+        }
+    }catch(error){
+        return{
+            success:false,
+            error
+        }
+    }
+}

@@ -25,6 +25,11 @@ db.exec(`CREATE TABLE IF NOT EXISTS clubs(
     member_list INTEGER,
     event_list INTEGER
     );`)
+db.exec(`CREATE TABLE IF NOT EXISTS presidents(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    );`)
 db.exec(`CREATE TABLE IF NOT EXISTS member_list(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER,

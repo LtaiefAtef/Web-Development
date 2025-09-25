@@ -1,7 +1,7 @@
 "use server"
 
 import { createAuthSession } from "@/lib/auth";
-import { addClub, createUser, findUser, findUserWithId, updateUserPassword, verifyOldPassword } from "@/lib/DATA_OPS";
+import { addClub, addRequest, createUser, findUser, findUserWithId, updateUserPassword, verifyOldPassword } from "@/lib/DATA_OPS";
 import { hashUserPassword, verifyPassword } from "@/lib/hash";
 import { redirect } from "next/navigation";
 
@@ -84,7 +84,7 @@ export async function changePassword(userId,prevState,formData){
         }
     }
 }
-export async function createClub(userId,prevState,formData){
+export async function sendClubCreateRequest(userId,prevState,formData){
     if(!formData){
         return;
     }
@@ -96,12 +96,11 @@ export async function createClub(userId,prevState,formData){
             error:"Both fields must be at least 6 characters length"
         }
     }
-    const userInfo = await findUserWithId(userId)
-    const result = await addClub(clubName,clubDescription,userId,userInfo.userInfo.full_name)
+    const result = await addRequest(userId,`${clubName}:\n${clubDescription}`)
     if(result.success){
         return{
             success:true,
-            message:"Club Create Sucessfully"
+            message:result.message
         }
     }
 }
