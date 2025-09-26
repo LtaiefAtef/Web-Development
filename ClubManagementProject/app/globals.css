@@ -489,8 +489,7 @@
           background-color: rgb(167, 28, 28);
         }
       }
-
-      thead tr th,tbody tr td{
+      thead tr th,tbody tr td,.total_request tr td{
             background-color: rgb(215, 232, 255);
             text-align: start;
             padding: 10px;
