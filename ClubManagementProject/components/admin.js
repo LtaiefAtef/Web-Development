@@ -47,7 +47,7 @@ export default function Admin({verified}) {
         const status = document.getElementById("status").value;
         const category = document.getElementById("category").value;
         const query  = document.getElementById("search-requests").value.toLowerCase();
-        setRequests({success:true,stmt:orignalData.stmt.filter((req)=> (req.request.toLowerCase().includes(query) && req.status.includes(status)))})
+        setRequests({success:true,stmt:orignalData.stmt.filter((req)=> (req.request.toLowerCase().includes(query) && req.status.includes(status) && req.category.includes(category)))})
     }
     useEffect(()=>{
         getData()
