@@ -1,0 +1,127 @@
+.link {
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+}
+
+.link::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    width: 0;
+    height: 2px; 
+    background-color: red;
+    transition: .5s all;
+}
+.link:hover::before,
+.link.active::before{
+    width: 100%;
+}
+@keyframes animate {
+    from{
+        width: 0;
+    }
+    to{
+        width:100%;
+    }
+}
+.drop {
+    position: relative;
+
+}
+
+.drop::after {
+    content: "▲";
+    font-weight: 600;
+    font-size: 17px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left:calc(100% + 10px);
+    transform: translate(-50%, -50%) rotate(90deg);
+    transition: transform .5s ease;
+}
+
+.drop:hover::after {
+    transform: translate(-50%, -50%) rotate(180deg);
+}
+.dropdown-menu {
+    background-color: white;
+    position: absolute;
+    color: black;
+    top: 40px;
+    font-size: 20px;
+    width:0px;
+    height: 0px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    opacity: 0;
+    visibility: hidden;
+    list-style: none;
+    margin: 0;
+    padding: 20px;
+    gap: 20px;
+    transition: 200ms ease-out;
+    transition-delay: 0.2s;
+}
+
+.dropdown-menu::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    pointer-events: none;
+}
+
+.drop:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    width: 200px;
+    height:150px;
+    transition: all 500ms;
+}
+.drop:hover .dropdown-menu>*{
+    opacity: 1;
+    filter: blur(0px);
+}
+
+.dropdown-menu > * {
+    position: relative;
+    text-wrap: nowrap;
+    width: 150px;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    flex-basis: 33%;
+    filter: blur(10px);
+    transition: 300ms all;
+    transition-delay: 0.2s;
+
+}
+
+.dropdown-menu > *::before{
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    background-color: black;
+    transition: 300ms all;
+    width: 0%;
+    height: 3px;
+
+}
+.dropdown-menu>*:hover::before{
+    width: 100%;
+
+}
+.close__menu__button{
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: blue;
+}

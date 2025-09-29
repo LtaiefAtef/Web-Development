@@ -1,0 +1,28 @@
+.tokyo__night{
+    border: 2px solid black;
+    width: 50%;
+}
+
+.tokyo__night[data_image="tokyo_night1"]{
+    background-image: url("../assets/tokyo_night1.jpg");
+}
+.tokyo__night[data_image="tokyo_night2"]{
+    background-image: url("../assets/tokyo_night2.jpg");
+}
+.tokyo__night[data_image="tokyo_night3"]{
+    background-image: url("../assets/tokyo_night3.jpg");
+}
+.tokyo__night[data_image="tokyo_night3"]{
+    background-image: url("../assets/tokyo_night3.jpg");
+}
+.tokyo__night[data_image="tokyo_night4"]{
+    background-image: url("../assets/tokyo_night4.jpg");
+}
+.tokyo__night[data_image="tokyo_night5"]{
+    background-image: url("../assets/tokyo_night5.jpg");
+}
+.tokyo__container{
+    display: flex;
+    justify-content: space-between;
+    height: 70vh;
+}
