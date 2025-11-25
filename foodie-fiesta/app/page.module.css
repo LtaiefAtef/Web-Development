@@ -1,0 +1,11 @@
+.cover-image{
+    position: relative;
+
+}
+.cover-image::after{
+    content: '';
+    position: absolute;
+    background-color: blue ;
+    width: 400px;
+    height: 400px;
+}
